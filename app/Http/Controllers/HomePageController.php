@@ -2,21 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Post;
-use App\Category;
 
 class HomePageController extends Controller
 {
-    public function index(){
+    public function index()
+    {
+        $recent_news = Post::where('status', 1)->orderBy('id', 'DESC')->limit(3)->get();
+        $posts = Post::orderBy('id', 'desc')->paginate(8);
+        $hot_news = Post::with('user')->where('hot_news', 1)->where('status', 1)->orderBy('id', 'DESC')->get();
 
-   $top_viewed = Post::with('user')->withCount('comments')->where('status',1)->orderBy('view_count','DESC')->limit(2)->get();
-
-   $hot_news = Post::with('user')->withCount('comments')->where('hot_news',1)->where('status',1)->orderBy('id','DESC')->first();
-
-   $category_posts = Category::with('posts')->where('status',1)->orderBy('id','DESC')->limit(5)->get();
-
-
-    	return view('front.home',compact('top_viewed','hot_news','category_posts'));
+        return view('front.home', compact('hot_news', 'posts', 'recent_news'));
     }
 }

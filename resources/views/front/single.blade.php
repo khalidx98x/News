@@ -1,352 +1,171 @@
 @extends('front.layout.master')
+
+
 @section('content')
 
-<section id="entity_section" class="entity_section">
-<div class="container">
-<div class="row">
-<div class="col-md-8">
-<div class="entity_wrapper">
-    <div class="entity_title">
-        <h1><a href="{{ url('/details') }}/{{ $post->slug }}">{{ $post->title }} </a></h1>
-    </div>
-    <!-- entity_title -->
+<!-- ##### Viral News Breadcumb Area Start ##### -->
+<div class="viral-news-breadcumb-area section-padding-50">
+    <div class="container h-100">
+        <div class="row h-100 align-items-center">
 
-    <div class="entity_meta"><a href="#" target="_self">{{ date('F j-Y',strtotime($post->created_at)) }}</a>, by: <a href="{{ url('/author') }}/{{ $post->user->id }}">{{ $post->user['name'] }}</a>
-    </div>
-    <!-- entity_meta -->
+            <!-- Breadcumb Area -->
+            <div class="col-12 col-md-4">
+                <h3>Articles</h3>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item"><a href=href="{{ url('/category') }}/{{ $post->category->id }}">{{$post->category->name}}</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">{{$post->title}}</li>
+                    </ol>
+                </nav>
+            </div>
 
-
-    <!-- entity_rating -->
-
-
-    <!-- entity_social -->
-
-    <div class="entity_thumb">
-        <img class="img-responsive" src="{{ asset('uploads/post') }}/{{ $post->main_image }} " alt="feature-top">
-    </div>
-    <!-- entity_thumb -->
-
-    <div class="entity_content">
-        <p>
-            {{ $post->short_description }}
-        </p>
-
-        <p>
-            {!! $post->description !!}
-        </p>
-
-
-    </div>
-    <!-- entity_content -->
-
-    <div class="entity_footer">
-
-        <!-- entity_tag -->
-
-        <div class="entity_social">
-
-            <span><i class="fa fa-comments-o"></i>{{ count($post->comments) }} <a href="#">Comments</a> </span>
-        </div>
-        <!-- entity_social -->
-
-    </div>
-    <!-- entity_footer -->
-
-</div>
-<!-- entity_wrapper -->
-
-<div class="related_news">
-    <div class="entity_inner__title header_purple">
-        <h2><a href="#">Related News</a></h2>
-    </div>
-    <!-- entity_title -->
-
-    <div class="row">
-   @foreach($related_news as $news)
-
-        <div class="col-md-6">
-            <div class="media">
-                <div class="media-left">
-                    <a href="{{ url('/details') }}/{{ $news->slug }}"><img class="media-object" src="{{ asset('uploads/post') }}/{{ $news->thumb_image }} "
-                                     alt="{{ $news->title }}"></a>
-                </div>
-                <div class="media-body">
-   <span class="tag purple"><a href="{{ url('/category') }}/{{ $news->category_id }}">{{ $news->category['name'] }}</a></span>
-
-                    <h3 class="media-heading"><a href="{{ url('/details') }}/{{ $news->slug }}">{{ $news->title }}</a></h3>
-                    <span class="media-date"><a href="#" target="_self">{{ date('F j-Y',strtotime($news->created_at)) }}</a>, by: <a href="{{ url('/author') }}/{{ $news->user->id }}">{{ $news->user['name'] }}</a></span>
-
-                    <div class="media_social">
-
-                        <span><a href="#"><i class="fa fa-comments-o"></i>{{ count($post->comments) }}</a> Comments</span>
-                    </div>
+            <!-- Add Widget -->
+            <div class="col-12 col-md-8">
+                <div class="add-widget">
+                    <a href="#"><img src="img/bg-img/add2.png" alt=""></a>
                 </div>
             </div>
-
-        </div>
-       @endforeach
-    </div>
-</div>
-<!-- Related news -->
-
-
-<!--Advertisement-->
-
-<div class="readers_comment">
-    <div class="entity_inner__title header_purple">
-        <h2>Readers Comment</h2>
-    </div>
-    <!-- entity_title -->
- @foreach($post->comments as $comment)
-   @if($comment->status === 1)
-    <div class="media">
-        <div class="media-left">
-            <a href="#">
-                <img alt="64x64" width="64" height="64" class="media-object" data-src="{{ asset('uploads/others/user.png ')}} "
-                     src="{{ asset('uploads/others/user.png ')}} " data-holder-rendered="true">
-            </a>
-        </div>
-        <div class="media-body">
-            <h2 class="media-heading"><a href="#">{{ $comment->name }}</a></h2>
-            {{ $comment->comment }}
-        </div>
-
-    </div>
-    <!-- media end -->
-      @endif
-    @endforeach
-    <!-- media end -->
-</div>
-<!--Readers Comment-->
-
-<div class="widget_advertisement">
-    <img class="img-responsive" src="{{ asset('uploads/front/img/category_advertisement.jpg')}} " alt="feature-top">
-</div>
-<!--Advertisement-->
-
-<div class="entity_comments">
-    <div class="entity_inner__title header_black">
-        <h2>Add a Comment</h2>
-    </div>
-    <!--Entity Title -->
-
-    <div class="entity_comment_from">
-
-            {{--  {{ Form::open(array('url' => '/comments','method'=>'post')) }}
-
-             {{ Form::hidden('slug',$post->slug) }}
-             {{ Form::hidden('post_id',$post->id) }}
-            <div class="form-group">
-  {{ Form::text('name',null,['class'=>'form-control','id'=>'name', 'placeholder'=>'Name'] )  }}
-            </div>
-
-            <div class="form-group comment">
-                {{ Form::textarea('comment',null,['class'=>'form-control','id'=>'comment', 'placeholder'=>'Comment'] )  }}
-            </div>
-
-            <button type="submit" class="btn btn-submit red">Submit</button>
-          {{ Form::close() }}
-
-    <!--Entity Comments From -->  --}}
-</div>
-</div>
-<!--Entity Comments -->
-
-</div>
-<!--Left Section-->
-
- <div class="col-md-4">
-<div class="widget">
-    <div class="widget_title widget_black">
-        <h2><a href="#">Most Viewed</a></h2>
-    </div>
-
-   @foreach($shareData['most_viewed'] as $item)
-
-    <div class="media">
-        <div class="media-left">
-            <a href="{{ url('/details') }}/{{ $item->slug }}">
-                <img width="200px" class="media-object" src="{{ asset('uploads/post') }}/{{ $item->thumb_image  }}" alt="{{ $item->title }}"></a>
-        </div>
-        <div class="media-body">
-            <h3 class="media-heading">
-                <a href="{{ url('/details') }}/{{ $item->slug }}">{{ $item->title }}</a>
-            </h3> <span class="media-date">
-                <a href="#">{{ date('j F -y',strtotime($item->created_at)) }}</a>,  by:
-                 <a href="{{ url('/author') }}/{{ $item->user->id }}">{{ $item->user['name'] }}</a></span>
-
-            <div class="widget_article_social">
-
-                <span>
-                    <a href="single.html" target="_self"><i class="fa fa-comments-o"></i>{{ count($item->comments) }}</a> Comments
-                </span>
-            </div>
         </div>
     </div>
-    @endforeach
-
-    <p class="widget_divider"><a href="#" target="_self">More News&nbsp;&raquo;</a></p>
 </div>
-<!-- Popular News -->
+<!-- ##### Viral News Breadcumb Area End ##### -->
 
-<div class="widget hidden-xs m30">
-    <img class="img-responsive adv_img" src="{{ asset('uploads/front/img/right_add1.jpg')}}" alt="add_one">
-    <img class="img-responsive adv_img" src="{{ asset('uploads/front/img/right_add2.jpg')}}" alt="add_one">
-    <img class="img-responsive adv_img" src="{{ asset('uploads/front/img/right_add3.jpg')}}" alt="add_one">
-    <img class="img-responsive adv_img" src="{{ asset('uploads/front/img/right_add4.jpg')}}" alt="add_one">
-</div>
-<!-- Advertisement -->
-
-<div class="widget hidden-xs m30">
-    <img class="img-responsive widget_img" src="{{ asset('uploads/front/img/right_add5.jpg')}}" alt="add_one">
-</div>
-<!-- Advertisement -->
-
-
-<!-- Advertisement -->
-
-<div class="widget m30">
-    <div class="widget_title widget_black">
-        <h2><a href="#">Most Commented</a></h2>
-    </div>
-
-    @foreach($shareData['most_commented'] as $item)
-
-    <div class="media">
-        <div class="media-left">
-            <a href="{{ url('/details') }}/{{ $item->slug }}">
-                <img width="200px" class="media-object" src="{{ asset('uploads/post') }}/{{ $item->thumb_image  }}" alt="{{ $item->title }}"></a>
-        </div>
-        <div class="media-body">
-            <h3 class="media-heading">
-                <a href="{{ url('/details') }}/{{ $item->slug }}">{{ $item->title }}</a>
-            </h3> <span class="media-date">
-                <a href="#">{{ date('j F -y',strtotime($item->created_at)) }}</a>,  by:
-                 <a href="{{ url('/author') }}/{{ $item->user->id }}">{{ $item->user['name'] }}</a></span>
-
-            <div class="widget_article_social">
-
-                <span>
-                    <a href="single.html" target="_self"><i class="fa fa-comments-o"></i>{{ count($item->comments) }}</a> Comments
-                </span>
-            </div>
-        </div>
-    </div>
-    @endforeach
-
-</div>
-<!-- Most Commented News -->
-
-<div class="widget m30">
-    <div class="widget_title widget_black">
-        <h2><a href="#">Editor Corner</a></h2>
-    </div>
-    <div class="widget_body"><img class="img-responsive left" src="{{ asset('uploads/front/img/editor.jpg')}}"
-                                  alt="Generic placeholder image">
-
-        <p>Collaboratively administrate empowered markets via plug-and-play networks. Dynamically procrastinate B2C
-            users after installed base benefits. Dramatically visualize customer directed convergence without</p>
-
-        <p>Collaboratively administrate empowered markets via plug-and-play networks. Dynamically procrastinate B2C
-            users after installed base benefits. Dramatically visualize customer directed convergence without
-            revolutionary ROI.</p>
-        <button class="btn pink">Read more</button>
-    </div>
-</div>
-<!-- Editor News -->
-
-<div class="widget hidden-xs m30">
-    <img class="img-responsive add_img" src="{{ asset('uploads/front/img/right_add7.jpg')}} " alt="add_one">
-    <img class="img-responsive add_img" src="{{ asset('uploads/front/img/right_add7.jpg')}} " alt="add_one">
-    <img class="img-responsive add_img" src="{{ asset('uploads/front/img/right_add7.jpg')}} " alt="add_one">
-    <img class="img-responsive add_img" src="{{ asset('uploads/front/img/right_add7.jpg')}} " alt="add_one">
-</div>
-<!--Advertisement -->
-
-<div class="widget m30">
-    <div class="widget_title widget_black">
-        <h2><a href="#">Readers Corner</a></h2>
-    </div>
-    <div class="widget_body"><img class="img-responsive left" src="{{ asset('uploads/front/img/reader.jpg')}}"
-                                  alt="Generic placeholder image">
-
-        <p>Collaboratively administrate empowered markets via plug-and-play networks. Dynamically procrastinate B2C
-            users after installed base benefits. Dramatically visualize customer directed convergence without</p>
-
-        <p>Collaboratively administrate empowered markets via plug-and-play networks. Dynamically procrastinate B2C
-            users after installed base benefits. Dramatically visualize customer directed convergence without
-            revolutionary ROI.</p>
-        <button class="btn pink">Read more</button>
-    </div>
-</div>
-<!--  Readers Corner News -->
-
-<div class="widget hidden-xs m30">
-    <img class="img-responsive widget_img" src="{{ asset('uploads/front/img/podcast.jpg')}}" alt="add_one">
-</div>
-<!--Advertisement-->
-</div>
-<!-- Right Section -->
-
-</div>
-<!-- Row -->
-
-</div>
-<!-- Container -->
-
-</section>
-<!-- Category News Section -->
-
-<section id="video_section" class="video_section">
+<!-- ##### Blog Area Start ##### -->
+<div class="blog-area section-padding-100">
     <div class="container">
-        <div class="well">
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="embed-responsive embed-responsive-4by3">
-                        <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/MJ-jbFdUPns"
-                                frameborder="0" allowfullscreen></iframe>
-                    </div>
-                    <!-- embed-responsive -->
+        @include('partials.messages')
+        <div class="row">
+            <div class="col-12 col-lg-8">
+                <div class="blog-posts-area">
 
+                    <!-- Single Featured Post -->
+                    <div class="single-blog-post-details">
+                        <div class="post-thumb">
+                            <img src="{{ asset('uploads/post') }}/{{ $post->main_image }}" alt="">
+                        </div>
+                        <div class="post-data">
+                            <a href="{{ url('/category') }}/{{ $post->category_id }}" class="post-catagory">{{$post->category->name}}</a>
+                            <h2 class="post-title">{{$post->title}}</h2>
+                            <div class="post-meta">
+
+                                <!-- Post Details Meta Data -->
+                                <div class="post-details-meta-data mb-50 d-flex align-items-center justify-content-between">
+                                    <!-- Post Author & Date -->
+                                    <div class="post-authors-date">
+                                        <p class="post-author">By <a href="{{ url('/author') }}/{{ $post->user->id }}">{{$post->user->name}}</a></p>
+                                        <p class="post-date">{{ date('F j,Y',strtotime( $post->created_at )) }}</p>
+                                    </div>
+                                    <!-- View Comments -->
+                                    <div class="view-comments">
+                                        <p class="views">{{$post->view_count}} views count</p>
+                                        <a href="#comments" class="comments">{{$post->comments_count}} comments</a>
+                                    </div>
+                                </div>
+
+                                {!!$post->description!!}
+                             </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Related Articles Area -->
+                    <div class="related-articles-">
+                        <h4 class="mb-70">Related Articles</h4>
+
+                        <div class="row">
+                           @foreach ($related_news as $item)
+                           <!-- Single Post -->
+                           <div class="col-12">
+                               <div class="single-blog-post style-3 style-5 d-flex align-items-center mb-50">
+                                   <!-- Post Thumb -->
+                                   <div class="post-thumb">
+                                       <a "{{ url('/details') }}/{{ $item->slug }}"><img src="{{ asset('uploads/post') }}/{{ $item->thumb_image }}"
+                                        alt="{{ $item->title }}"></a>
+                                   </div>
+                                   <!-- Post Data -->
+                                   <div class="post-data">
+                                    <a href="{{ url('/category') }}/{{ $item->category->id }}" class="post-catagory">{{$item->category->name}}</a>
+                                    <a href="{{ url('/details') }}/{{ $item->slug }}" class="post-title">
+                                        <h6>{{$item->title}}</h6>
+                                    </a>
+                                    <div class="post-meta">
+                                        <p class="post-author">By <a href="{{ url('/author') }}/{{ $item->user->id }}">{{$item->user->name}}</a></p>
+                                        <p class="post-date">{{ date('F j,Y',strtotime( $item->created_at )) }}</p>
+                                    </div>
+                                </div>
+                               </div>
+                           </div>
+
+                           @endforeach
+
+                        </div>
+                    </div>
+                    <!-- Comment Area Start -->
+                    <div class="comment_area clearfix" id="comments">
+                        @if ($post->comments_count <=0)
+                        <h4 class="title mb-70">No comments </h4>
+                        @else
+                        <h4 class="title mb-70">{{$post->comments_count}} comment</h4>
+                        <ol>
+                            @foreach ($post->comments as $comment)
+                            @if($comment->status === 1)
+                            <!-- Single Comment Area -->
+                            <li class="single_comment_area">
+                                <!-- Comment Content -->
+                                <div class="comment-content d-flex">
+                                    <!-- Comment Author -->
+                                    <div class="comment-author">
+                                        <img  src="{{ asset('uploads/others/user.png ')}} ">
+                                    </div>
+                                    <!-- Comment Meta -->
+                                    <div class="comment-meta">
+                                        <a href="#" class="post-author">{{$comment->name}}</a>
+                                        <a href="#" class="post-date">{{ date('F j,Y',strtotime( $comment->created_at )) }}</a>
+                                        <p>{{$comment->comment}}</p>
+                                    </div>
+                                </div>
+                            </li>
+                            @endif
+
+                            @endforeach
+
+                              </ol>
+                        @endif
+
+
+                    </div>
+
+                    <div class="post-a-comment-area">
+                        <h4 class="mb-70">Leave a comment</h4>
+
+                        <!-- Reply Form -->
+                        <div class="contact-form-area">
+                            <form action="{{route('postcomment.store')}}" method="post">
+                                @csrf
+                                <div class="row">
+                                    <div class="col-12 col-lg-6">
+                                        <input type="text" class="form-control" name="name" id="name" placeholder="Name*">
+                                    </div>
+
+                                    <div class="col-12">
+                                        <textarea  class="form-control" name="comment" id="comment" cols="30" rows="10" placeholder="Message"></textarea>
+                                    </div>
+
+                                    <input type="hidden" name="post_id" value="{{$post->id}}">
+                                    <div class="col-12">
+                                        <button class="btn viral-btn mt-30" type="submit">Submit Comment</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
                 </div>
-                <!-- col-md-6 -->
-
-                <div class="col-md-3">
-                    <div class="embed-responsive embed-responsive-4by3">
-                        <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/h5Jni-vy_5M"></iframe>
-                    </div>
-                    <!-- embed-responsive -->
-
-                    <div class="embed-responsive embed-responsive-4by3 m16">
-                        <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/wQ5Gj0UB_R8"></iframe>
-                    </div>
-                    <!-- embed-responsive -->
-
-                </div>
-                <!-- col-md-3 -->
-
-                <div class="col-md-3">
-                    <div class="embed-responsive embed-responsive-4by3">
-                        <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/UPvJXBI_3V4"></iframe>
-                    </div>
-                    <!-- embed-responsive -->
-
-                    <div class="embed-responsive embed-responsive-4by3 m16">
-                        <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/DTCtj5Wz6BM"></iframe>
-                    </div>
-                    <!-- embed-responsive -->
-
-                </div>
-                <!-- col-md-3 -->
-
             </div>
-            <!-- row -->
 
+
+            @include('front.layout.sidebar')
         </div>
-        <!-- well -->
-
     </div>
-
-</section>
-<!-- Entity Section Wrapper -->
+</div>
 @endsection

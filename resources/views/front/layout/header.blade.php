@@ -1,114 +1,94 @@
-<section id="header_section_wrapper" class="header_section_wrapper">
-    <div class="container">
-        <div class="header-section">
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="left_section">
-                                            <span class="date">
-                                               {{ date('l') }}
-                                            </span>
-                        <!-- Date -->
-                                            <span class="time">
-                                               {{ date('j F. Y') }}
-                                            </span>
-                        <!-- Time -->
-                        <div class="social">
-                            <a class="icons-sm fb-ic"><i class="fa fa-facebook"></i></a>
-                            <!--Twitter-->
-                            <a class="icons-sm tw-ic"><i class="fa fa-twitter"></i></a>
-                            <!--Google +-->
-                            <a class="icons-sm inst-ic"><i class="fa fa-instagram"> </i></a>
-                            <!--Linkedin-->
-                            <a class="icons-sm tmb-ic"><i class="fa fa-tumblr"> </i></a>
-                            <!--Pinterest-->
-                            <a class="icons-sm rss-ic"><i class="fa fa-rss"> </i></a>
-                        </div>
-                        <!-- Top Social Section -->
-                    </div>
-                    <!-- Left Header Section -->
-                </div>
-                <div class="col-md-4">
-                    <div class="logo">
-                        <a href="index.html"><img src="{{ asset('uploads/others') }}/{{ $shareData['front_logo'] }}" alt="Tech NewsLogo"></a>
-                    </div>
-                    <!-- Logo Section -->
-                </div>
-                <div class="col-md-4">
-                    <div class="right_section">
-                        <ul class="nav navbar-nav">
-                            <li><a href=" {{ url('/login') }} ">Login</a></li>
-                            <li><a href="{{ url('/register') }}">Register</a></li>
-                            <li class="dropdown lang">
-                                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1"
-                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">En <i
-                                        class="fa fa-angle-down"></i></button>
-                                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                    <li><a href="#">Bn</a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                        <!-- Language Section -->
+<header class="header-area">
 
-                        <ul class="nav-cta hidden-xs">
-                            <li class="dropdown"><a href="#" data-toggle="dropdown" class="dropdown-toggle"><i
-                                    class="fa fa-search"></i></a>
-                                <ul class="dropdown-menu">
-                                    <li>
-                                        <div class="head-search">
-                                            <form role="form">
-                                                <!-- Input Group -->
-                                                <div class="input-group">
-                                                    <input type="text" class="form-control"
-                                                           placeholder="Type Something"> <span class="input-group-btn">
-                                                                            <button type="submit"
-                                                                                    class="btn btn-primary">Search
-                                                                            </button>
-                                                                        </span></div>
-                                            </form>
-                                        </div>
-                                    </li>
+    <!-- Top Header Area -->
+    <div class="top-header-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="top-header-content d-flex align-items-center justify-content-between">
+                        <!-- Breaking News Area -->
+                        <div class="top-breaking-news-area">
+                            <div id="breakingNewsTicker" class="ticker">
+                                <ul>
+                                    <li><a href="#">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</a></li>
+                                    <li><a href="#">Welcome to Colorlib Family.</a></li>
+                                    <li><a href="#">Nam eu metus sitsit amet, consec!</a></li>
                                 </ul>
-                            </li>
-                        </ul>
-                        <!-- Search Section -->
+                            </div>
+                        </div>
+
+                        <!-- Social Info Area-->
+                        <div class="top-social-info-area">
+                            <a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a>
+                            <a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a>
+                            <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                            <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                        </div>
                     </div>
-                    <!-- Right Header Section -->
                 </div>
             </div>
         </div>
-        <!-- Header Section -->
-
-        <div class="navigation-section">
-            <nav class="navbar m-menu navbar-default">
-                <div class="container">
-                    <!-- Brand and toggle get grouped for better mobile display -->
-                    <div class="navbar-header">
-                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-                                data-target="#navbar-collapse-1"><span class="sr-only">Toggle navigation</span> <span
-                                class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
-                        </button>
-                    </div>
-                    <!-- Collect the nav links, forms, and other content for toggling -->
-                    <div class="collapse navbar-collapse" id="#navbar-collapse-1">
-                         <ul class="nav navbar-nav main-nav">
-                            <li class="active"><a href=" {{ url('/') }} ">Home</a></li>
-
-                          @foreach($shareData['categories'] as $category)
-     <li><a href="{{ url('/category') }}/{{ $category->id }}">{{ $category->name }}</a></li>                         @endforeach
-
-         {{--  @foreach($shareData['authors'] as $author)
-     <li><a href="{{ url('/author') }}/{{ $author->id }}">{{ $author->name }}</a></li>                         @endforeach  --}}
-
-                        </ul>
-                    </div>
-                    <!-- .navbar-collapse -->
-                </div>
-                <!-- .container -->
-            </nav>
-            <!-- .nav -->
-        </div>
-        <!-- .navigation-section -->
     </div>
-    <!-- .container -->
-</section>
-<!-- header_section_wrapper -->
+
+    <!-- Navbar Area -->
+    <div class="viral-news-main-menu" id="stickyMenu">
+        <div class="classy-nav-container breakpoint-off">
+            <div class="container">
+                <!-- Menu -->
+                <nav class="classy-navbar justify-content-between" id="viralnewsNav">
+
+                    <!-- Logo -->
+                    <a class="nav-brand" href="{{route('homepage')}}"><img src="{{asset('front/img/core-img/logo.png')}}" alt="Logo"></a>
+
+                    <!-- Navbar Toggler -->
+                    <div class="classy-navbar-toggler">
+                        <span class="navbarToggler"><span></span><span></span><span></span></span>
+                    </div>
+
+                    <!-- Menu -->
+                    <div class="classy-menu">
+
+                        <!-- close btn -->
+                        <div class="classycloseIcon">
+                            <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
+                        </div>
+
+                        <!-- Nav Start -->
+                        <div class="classynav">
+                            <ul>
+                                @foreach($shareData['categories'] as $category)
+                                    <li><a href="{{ url('/category') }}/{{ $category->id }}">{{ $category->name }}</a></li>
+                                @endforeach
+                            </ul>
+
+
+
+                            <!-- Search Button -->
+                            <div class="search-btn">
+                                <i id="searchbtn" class="fa fa-search" aria-hidden="true"></i>
+                            </div>
+
+                            <!-- Search Form -->
+                            <div class="viral-search-form">
+                                <form id="search" action="#" method="get">
+                                    <input type="text" name="search-terms" placeholder="Enter your keywords ...">
+                                    <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+                                </form>
+                            </div>
+
+                            <!-- Video Post Button -->
+                            <div class="add-post-button">
+                                <a href=" {{ url('/login') }} " class="btn add-post-btn">Login</a>
+                            </div>
+
+
+
+                        </div>
+                        <!-- Nav End -->
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+<!-- ##### Header Area End ##### -->

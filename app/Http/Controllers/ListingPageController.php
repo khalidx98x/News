@@ -2,26 +2,24 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Category;
 use App\Post;
 
 class ListingPageController extends Controller
 {
-    public function index(){
-    	return view('front.listing');
+    public function listing($id)
+    {
+        $posts = Post::with(['comments', 'category', 'user'])->where('status', 1)->where('user_id', $id)->orderBy('id', 'DESC')->paginate(5);
+        $page_name = $posts[0]->user->name;
+
+        return view('front.listing', compact('posts', 'page_name'));
     }
 
-  public function listing($id){
-  $posts = Post::with(['comments','category','user'])->where('status',1)->where('user_id',$id)->orderBy('id','DESC')->paginate(5);
-  return view('front.listing',compact('posts'));
+    public function listing1($id)
+    {
+        $posts = Post::with(['comments', 'category', 'user'])->where('status', 1)->where('category_id', $id)->orderBy('id', 'DESC')->paginate(5);
+        $page_name = Category::where('id', $id)->pluck('name')->first();
 
-  }
-
-
-    public function listing1($id){
-  $posts = Post::with(['comments','category','user'])->where('status',1)->where('category_id',$id)->orderBy('id','DESC')->paginate(5);
-  return view('front.listing',compact('posts'));
-
-  }
-
+        return view('front.listing', compact('posts', 'page_name'));
+    }
 }

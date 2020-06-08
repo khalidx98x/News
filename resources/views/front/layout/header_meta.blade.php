@@ -1,35 +1,14 @@
-<meta charset="utf-8">
+<meta charset="UTF-8">
+<meta name="description" content="">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>TechNews - HTML and CSS Template</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
-<!-- favicon -->
-<link href="{{asset('public/front/img/favicon.png')}}" rel=icon>
+<!-- Title -->
+<title>News Website</title>
 
-<!-- web-fonts -->
-<link href='https://fonts.googleapis.com/css?family=Roboto:100,300,400,700,500' rel='stylesheet' type='text/css'>
+<!-- Favicon -->
+<link rel="icon" href="img/core-img/favicon.ico">
 
-<!-- Bootstrap -->
-    <link href="{{ asset('front/css/bootstrap.min.css')}}" rel="stylesheet">
-
-    <!-- font-awesome -->
-    <link href="{{ asset('front/fonts/font-awesome/font-awesome.min.css')}}" rel="stylesheet">
-    <!-- Mobile Menu Style -->
-    <link href="{{ asset('front/css/mobile-menu.css')}}" rel="stylesheet">
-
-    <!-- Owl carousel -->
-    <link href="{{ asset('front/css/owl.carousel.css')}}" rel="stylesheet">
-    <link href="{{ asset('front/css/owl.theme.default.min.css')}}" rel="stylesheet">
-    <!-- Theme Style -->
-    <link href="{{ asset('front/css/style.css')}}" rel="stylesheet">
-
-
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
-
-
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
+<!-- Core Stylesheet -->
+<link rel="stylesheet" href="{{asset('front/style.css')}}">
