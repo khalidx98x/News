@@ -76,9 +76,21 @@
                             </div>
 
                             <!-- Video Post Button -->
+                            @if(!auth()->check())
                             <div class="add-post-button">
                                 <a href=" {{ url('/login') }} " class="btn add-post-btn">Login</a>
                             </div>
+                            @else 
+                            <div class="add-post-button">
+                                <a href=" {{ route('logout') }} " class="btn add-post-btn"  onclick="event.preventDefault();
+                                document.getElementById('logout-form').submit();">
+                                {{ __('Logout') }}</a>
+                            </div>
+                            
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                @csrf
+                            </form>
+                            @endif
 
 
 
