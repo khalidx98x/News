@@ -33,20 +33,42 @@
     </div>
 </div>
 
+<!-- ##### Welcome Slide Area Start ##### -->
+    <div class="welcome-slide-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="welcome-slides owl-carousel">
 
-<div class="welcome-slide-area">
-    <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <div class="welcome-slides owl-carousel">
+                        @php
+                            $count = 0;
+                        @endphp
+                        <!-- Single Welcome Slide -->
+                        @foreach ($hot_news as $item)
 
-                    <!-- Single Welcome Slide -->
-                    <div class="single-welcome-slide">
-                        <div class="row no-gutters">
+                        @if ($count ==0 || $count % 3 ==0)
+                        <div class="single-welcome-slide">
+                            <div class="row no-gutters">
 
-                         @foreach ($hot_news as $index=> $item)
-                            @if ($index ==0 || $index % 3 ==0)
-                            <div class="col-12 col-lg-8">
+                                <div class="col-12 col-lg-8">
+                                    <!-- Welcome Post -->
+                                    <div class="welcome-post">
+                                        <img src="{{ asset('uploads/post') }}/{{ $item->main_image }}"  alt="{{ $item->title }}">
+                                        <div class="post-content" data-animation="fadeInUp" data-duration="500ms">
+                                            <a href="{{ url('/category') }}/{{ $item->category->id }}" class="tag">{{$item->category->name}}</a>
+                                            <a href="{{ url('/details') }}/{{ $item->slug }}" class="post-title">{{$item->title}}</a>
+                                            <p>{{ date('F j,Y',strtotime( $item->created_at )) }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-12 col-lg-4">
+                                    <div class="welcome-posts--">
+
+                                @php
+                                    $count++;
+                                @endphp
+                                @else
                                 <!-- Welcome Post -->
                                 <div class="welcome-post">
                                     <img src="{{ asset('uploads/post') }}/{{ $item->main_image }}"  alt="{{ $item->title }}">
@@ -56,43 +78,29 @@
                                         <p>{{ date('F j,Y',strtotime( $item->created_at )) }}</p>
                                     </div>
                                 </div>
+
+                                @php $count++; @endphp
+                              @endif
+
+                                @if ($count % 3 ==0)
+
                             </div>
-
-                            <div class="col-12 col-lg-4">
-
-                            @else
-
-                                <div class="welcome-posts--">
-                                    <!-- Welcome Post -->
-                                    <div class="welcome-post style-2">
-                                        <img src="{{ asset('uploads/post') }}/{{ $item->main_image }}"  alt="{{ $item->title }}">
-                                        <div class="post-content" data-animation="fadeInUp" data-delay="500ms" data-duration="500ms">
-                                            <a href="{{ url('/category') }}/{{ $item->category->id }}" class="tag tag-2">{{$item->category->name}}</a>
-                                            <a href="{{ url('/details') }}/{{ $item->slug }}" class="post-title">{{$item->title}}</a>
-                                            <p>{{ date('F j,Y',strtotime( $item->created_at )) }}</p>
-                                        </div>
-                                    </div>
-
-
-                                </div>
-                                @if ($index % 2 ==0)
-                            </div>
-
-                                @endif
-                            @endif
-                         @endforeach
-
                         </div>
                     </div>
+                </div>
+                                @endif
+
+                        @endforeach
 
 
 
+
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-
+    <!-- ##### Welcome Slide Area End ##### -->
 
 
 <div class="viral-story-blog-post section-padding-0-50">

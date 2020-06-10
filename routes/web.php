@@ -11,7 +11,8 @@
 |
 */
 
-use Spatie\Permission\Models\Role;
+use App\Post;
+use App\Category;
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -85,9 +86,10 @@ Auth::routes();
 // });
 // Route::get('/home', 'HomeController@index')->name('home');
 
-// Route::get('test',function(){
-//     $role = Role::findOrFail(1);
-//     foreach ($role->permissions()->get() as $permission){
-//         dd($permission);
-//     }
-// });
+Route::get('test', function () {
+    $posts = Post::all();
+
+    for ($i = 1; $i < count($posts); ++$i) {
+        dd($posts[$i]);
+    }
+});
