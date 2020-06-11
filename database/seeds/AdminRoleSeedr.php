@@ -27,7 +27,7 @@ class AdminRoleSeeder extends Seeder
         //inital admin information
         $data = [
             'name' => 'admin',
-            'email' => 'adminhohoih@admin.com',
+            'email' => 'admin@admin.com',
             'password' => Hash::make('admin'),
             'type' => 1,
         ];
